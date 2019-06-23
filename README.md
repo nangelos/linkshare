@@ -1,0 +1,1 @@
+This is a Firefox extension that will allow for easily sharing links without needing to click the URL bar, copy, and then paste into WhatsApp or another app. LinkShare will allow a single click to do all those steps for you.
