@@ -2,6 +2,7 @@ const getCurrentWindowTabs = () => {
   // return browser.tabs.query({ currentWindow: true });
   return browser.tabs.query({ active: true })
 }
+
 const listTabs = () => {
   getCurrentWindowTabs().then(tab => {
     console.log('here is the tab: ', tab)
@@ -29,7 +30,6 @@ const listTabs = () => {
     const makeOptions = arr => {
       const { chats } = arr
       const existingChats = Array.isArray(chats) ? chats : []
-      console.log(existingChats)
       existingChats.map(opt => {
         let option = document.createElement('option')
         option.appendChild(document.createTextNode(opt.text))
@@ -65,6 +65,31 @@ const listTabs = () => {
     currentTabs.appendChild(chatButton)
 
     tabsList.appendChild(currentTabs)
+  })
+}
+
+async function postLink(link) {
+  const telegramURL = await browser.storage.sync.get('telegramURL')
+  const chat = {id: 123, value: 'somechat'} // get from options dropdown
+  const linkText =  "asdf" // get link text from form
+  const linkDesc = "a link" // get link desc from form
+
+  const data = {
+    message: {
+      text: `${linkText}\n${linkDesc}`
+      chat: {
+        id: chat.id
+      }
+    }
+  }
+
+  return fetch(telegramURL, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
   })
 }
 
