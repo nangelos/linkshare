@@ -1,5 +1,11 @@
 .panel {
   text-align: center;
+  padding: 10px;
+  max-width: 300px;
+}
+:root {
+  --boxshadow: 1px 2px 10px 0px rgba(50, 50, 50, 0.35);
+  --borderradius: 5px;
 }
 
 .text-section-header {
@@ -29,10 +35,26 @@
 }
 
 .send-button {
-  background-color: greenyellow;
-  border: black 1px solid;
-  border-radius: 5px;
+  background-color: #45a1ff;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--borderradius);
   padding: 3px;
   margin: 3px;
   height: 30px;
+  box-shadow: var(--boxshadow);
+  width: 80%;
+}
+
+.chat-button {
+  background-color: #202340;
+  border: none;
+  color: #fff;
+  border-radius: var(--borderradius);
+  box-shadow: var(--boxshadow);
+  padding: 3px;
+  margin: 3px;
+  height: 30px;
+  cursor: pointer;
+  width: 25%;
 }

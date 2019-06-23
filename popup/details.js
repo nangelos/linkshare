@@ -5,42 +5,47 @@ const getCurrentWindowTabs = () => {
 
 const listTabs = () => {
   getCurrentWindowTabs().then(tab => {
-    console.log('here is the tab: ', tab);
+    console.log("here is the tab: ", tab);
     const activeTab = tab[0];
-    let tabsList = document.getElementById('tabs-list');
+    let tabsList = document.getElementById("tabs-list");
     let currentTabs = document.createDocumentFragment();
 
-    tabsList.textContent = '';
+    tabsList.textContent = "";
 
     //Tab title
-    let tabTitle = document.createElement('h4');
+    let tabTitle = document.createElement("h4");
     tabTitle.textContent = activeTab.title || activeTab.id;
 
     //Input box
-    let textInput = document.createElement('textarea');
-    textInput.className = 'detail-box';
-    textInput.name = 'message';
-    textInput.rows = '4';
-    textInput.placeholder = 'Add description (optional)';
+    let textInput = document.createElement("textarea");
+    textInput.className = "detail-box";
+    textInput.name = "message";
+    textInput.rows = "4";
+    textInput.placeholder = "Add description (optional)";
 
-    let chatId = document.createElement('input');
-    chatId.type = 'text';
-    chatId.id = 'chat-id';
-    chatId.name = 'chatId';
-    chatId.placeholder = 'Enter Chat ID';
+    let chatId = document.createElement("input");
+    chatId.type = "text";
+    chatId.id = "chat-id";
+    chatId.name = "chatId";
+    chatId.placeholder = "Enter Chat ID";
 
-    let chatName = document.createElement('select');
-    chatName.id = 'chat-name';
-    chatName.options = ['Option 1', 'Option 2'];
+    let chatName = document.createElement("select");
+    chatName.id = "chat-name";
+    chatName.options = ["Option 1", "Option 2"];
 
     //Send Button
-    let sendButton = document.createElement('input');
-    sendButton.className = 'send-button';
-    sendButton.type = 'button';
-    sendButton.value = 'Send URL';
+    let sendButton = document.createElement("input");
+    sendButton.className = "send-button";
+    sendButton.type = "button";
+    sendButton.value = "Send URL";
+
+    const chatButton = document.createElement("input");
+    chatButton.className = "chat-button";
+    chatButton.type = "button";
+    chatButton.value = "Add Chat";
 
     //Url to send along
-    let textUrl = document.createElement('p');
+    let textUrl = document.createElement("p");
     textUrl.textContent = activeTab.url;
 
     currentTabs.appendChild(tabTitle);
@@ -49,9 +54,10 @@ const listTabs = () => {
     currentTabs.appendChild(chatName);
     currentTabs.appendChild(textInput);
     currentTabs.appendChild(sendButton);
+    currentTabs.appendChild(chatButton);
 
     tabsList.appendChild(currentTabs);
   });
 };
 
-document.addEventListener('DOMContentLoaded', listTabs);
+document.addEventListener("DOMContentLoaded", listTabs);
