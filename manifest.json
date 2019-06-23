@@ -6,12 +6,11 @@
   "icons": {
       "48": "icons/devtopocket-48.png"
   },
-  "content_scripts": [
-    {
-        "matches": ["*://dev.to/*/*"],
-        "js": ["pagetotelegram.js"]
-    }
-],
+"browser_action": {
+  "default_icon": {
+    "48": "images/send.png"
+  }
+},
 "background": {
     "scripts": ["background.js"]
 },
@@ -19,8 +18,7 @@
     "storage",
     "cookies",
     "webNavigation",
-    "tabs",
-    "*://dev.to/*/*",
-    "*://getpocket.com/*"
+    "<all_urls>",
+    "tabs"
 ]
 }
