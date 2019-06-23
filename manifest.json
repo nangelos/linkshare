@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "LinkShare",
+  "version": "1.0.0",
+  "description": "Send your current URL to your connections in Telegram",
+  "icons": {
+      "48": "icons/devtopocket-48.png"
+  },
+  "content_scripts": [
+    {
+        "matches": ["*://dev.to/*/*"],
+        "js": ["pagetotelegram.js"]
+    }
+],
+"background": {
+    "scripts": ["background.js"]
+},
+  "permissions": [
+    "storage",
+    "cookies",
+    "webNavigation",
+    "tabs",
+    "*://dev.to/*/*",
+    "*://getpocket.com/*"
+]
+}
