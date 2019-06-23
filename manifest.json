@@ -23,5 +23,10 @@
     "webNavigation",
     "<all_urls>",
     "tabs"
-]
+],
+"applications": {
+  "gecko": {
+    "id": "linksharebot@teukka.tech"
+  }
+}
 }
