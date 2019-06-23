@@ -9,7 +9,10 @@
 "browser_action": {
   "default_icon": {
     "48": "images/send.png"
-  }
+  },
+  "browser_style": true,
+  "default_title": "Additional Info",
+  "default_popup": "popup/options.html"
 },
 "background": {
     "scripts": ["background.js"]

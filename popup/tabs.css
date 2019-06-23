@@ -1,0 +1,38 @@
+.panel {
+  text-align: center;
+}
+
+.text-section-header {
+  color: green;
+  text-align: center;
+}
+
+#tabs-list {
+  text-align: center;
+}
+
+#chat-id {
+  margin-top: 5px;
+  display: block;
+}
+
+#chat-name {
+  width: 100px;
+  margin-top: 5px;
+  display: block;
+}
+
+.detail-box {
+  background-color: lightgrey;
+  width: 100%;
+  resize: none;
+}
+
+.send-button {
+  background-color: greenyellow;
+  border: black 1px solid;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 3px;
+  height: 30px;
+}
