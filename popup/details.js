@@ -5,28 +5,15 @@ const getCurrentWindowTabs = () => {
 
 const listTabs = () => {
   getCurrentWindowTabs().then(tab => {
-    console.log('here is the tab: ', tab)
+    const currentTabs = document.createDocumentFragment()
     const activeTab = tab[0]
-    let tabsList = document.getElementById('tabs-list')
-    let currentTabs = document.createDocumentFragment()
-
-    tabsList.textContent = ''
-
-    //Tab title
+    const tabsList = document.getElementById('tabs-list')
     const tabTitle = document.createElement('h4')
     tabTitle.textContent = activeTab.title || activeTab.id
 
-    //Input box
-    const textInput = document.createElement('textarea')
-    textInput.className = 'detail-box'
-    textInput.name = 'message'
-    textInput.rows = '4'
-    textInput.placeholder = 'Add description (optional)'
-
-    const chatName = document.createElement('select')
-    chatName.id = 'chat-name'
-
     const options = browser.storage.sync.get('chats')
+    const chatName = document.querySelector('#chats')
+
     const makeOptions = arr => {
       const { chats } = arr
       const existingChats = Array.isArray(chats) ? chats : []
@@ -37,32 +24,14 @@ const listTabs = () => {
         chatName.appendChild(option)
       })
     }
+
     options.then(makeOptions)
 
-    //Send Button
-    const sendButton = document.createElement('input')
-    sendButton.className = 'button send'
-    sendButton.type = 'submit'
-    sendButton.value = 'Send URL'
-
-    const chatButton = document.createElement('input')
-    chatButton.className = 'button chat'
-    chatButton.type = 'button'
-    chatButton.value = 'Edit Chats'
-    chatButton.addEventListener('click', () => {
-      const form = document.querySelector('form')
-      form.style.display = 'flex'
-    })
     //Url to send along
     let textUrl = document.createElement('p')
     textUrl.textContent = activeTab.url
-
     currentTabs.appendChild(tabTitle)
     currentTabs.appendChild(textUrl)
-    currentTabs.appendChild(chatName)
-    currentTabs.appendChild(textInput)
-    currentTabs.appendChild(sendButton)
-    currentTabs.appendChild(chatButton)
 
     tabsList.appendChild(currentTabs)
   })
@@ -70,26 +39,26 @@ const listTabs = () => {
 
 async function postLink(link) {
   const telegramURL = await browser.storage.sync.get('telegramURL')
-  const chat = {id: 123, value: 'somechat'} // get from options dropdown
-  const linkText =  "asdf" // get link text from form
-  const linkDesc = "a link" // get link desc from form
+  const chat = { id: 123, value: 'somechat' } // get from options dropdown
+  const linkText = 'asdf' // get link text from form
+  const linkDesc = 'a link' // get link desc from form
 
   const data = {
     message: {
-      text: `${linkText}\n${linkDesc}`
+      text: `${linkText}\n${linkDesc}`,
       chat: {
-        id: chat.id
-      }
-    }
+        id: chat.id,
+      },
+    },
   }
 
   return fetch(telegramURL, {
     method: 'POST',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
 }
 
@@ -124,11 +93,16 @@ function clearChats(e) {
 }
 
 function hideForm() {
-  document.querySelector('form').style.display = 'none'
+  document.querySelector('#editChat').style.display = 'none'
   document.querySelector('#chatId').value = ''
   document.querySelector('#chatName').value = ''
 }
 
 document.addEventListener('DOMContentLoaded', listTabs)
-document.querySelector('form').addEventListener('submit', saveChat)
+document.querySelector('#editChat').addEventListener('submit', saveChat)
 document.querySelector('#clear').addEventListener('click', clearChats)
+document.querySelector('#sendForm').addEventListener('submit', postLink)
+document.querySelector('#editButton').addEventListener('click', () => {
+  const editForm = document.querySelector('#editChat')
+  editForm.style.display = 'flex'
+})

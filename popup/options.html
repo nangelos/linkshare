@@ -7,15 +7,28 @@
   <body>
     <div class="panel">
       <div class="panel-section panel-section-header">
-        <div class="text-section-header">Add Additional Info</div>
+        <div class="text-section-header">Share in Telegram</div>
       </div>
-      <form>
+      <form id="editChat" style="display: none;">
         <label>Chat Id<input type="text" id="chatId"/></label>
         <label>Chat Name<input type="text" id="chatName"/></label>
         <button type="submit" class="button save">Save</button>
         <button class="button clear" id="clear">Clear All</button>
       </form>
-      <div class="switch-tabs"><div id="tabs-list"></div></div>
+      <div id="tabs-list"></div>
+      <form id="sendForm">
+        <label for="chats">Send to chat:</label>
+        <input list="chats" id="myChats" name="myChats" placeholder="search" />
+        <datalist id="chats"></datalist>
+        <textarea
+          class="detail-box"
+          name="message"
+          rows="4"
+          placeholder="Add description(optional)"
+          ></textarea>
+        <input type="submit" class="button send" value="Send URL"></input>
+      </form>
+      <input id="editButton" type="button" class="button chat" value="Edit Chats"></input>
     </div>
 
     <script src="details.js"></script>
