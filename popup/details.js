@@ -40,7 +40,7 @@ const listTabs = () => {
 async function postLink(e) {
   e.preventDefault()
   const activeTab = await browser.tabs.query({ active: true })
-  const telegramURL = await browser.storage.sync.get('telegramURL')
+  const { telegramURL } = await browser.storage.sync.get('telegramURL')
   const chat = document.querySelector('#myChats').value
   const linkText = activeTab[0].url
   const linkDesc = document.querySelector('#linkDesc').value
@@ -53,16 +53,18 @@ async function postLink(e) {
       },
     },
   }
-  console.log(data)
+  console.log(telegramURL)
 
   fetch(telegramURL, {
     method: 'POST',
-    mode: 'cors',
+    body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
   })
+    .then(res => res.json())
+    .then(response => console.log(JSON.stringify(response)))
+    .catch(err => console.log('ERROR: ', err))
 }
 
 function saveChat(e) {
