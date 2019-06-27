@@ -37,22 +37,25 @@ const listTabs = () => {
   })
 }
 
-async function postLink(link) {
+async function postLink(e) {
+  e.preventDefault()
+  const activeTab = await browser.tabs.query({ active: true })
   const telegramURL = await browser.storage.sync.get('telegramURL')
-  const chat = { id: 123, value: 'somechat' } // get from options dropdown
-  const linkText = 'asdf' // get link text from form
-  const linkDesc = 'a link' // get link desc from form
+  const chat = document.querySelector('#myChats').value
+  const linkText = activeTab[0].url
+  const linkDesc = document.querySelector('#linkDesc').value
 
   const data = {
     message: {
       text: `${linkText}\n${linkDesc}`,
       chat: {
-        id: chat.id,
+        id: chat,
       },
     },
   }
+  console.log(data)
 
-  return fetch(telegramURL, {
+  fetch(telegramURL, {
     method: 'POST',
     mode: 'cors',
     headers: {
